@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Male - New Patient - Dosage Calculator</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <h1>Male - New Patient</h1>
+  <h2>Dosage Calculator</h2>
+
+  <div id="testosteroneDoseBlock">
+    <h3>Testosterone Dose: <span id="testosteroneDose"></span></h3>
+    <h3>Desiccated Thyroid Dose: <span id="desiccatedThyroidDose"></span></h3>
+  </div>
+  <div id="dialogueContainer"></div>
+  
+
+ 
+  <form id="form">
+    <fieldset>
+      <legend>Patient Information</legend>
+      <label for="patientID">Patient ID:</label>
+      <input type="text" id="patientID" name="patientID" required><br><br>
+    
+      <label for="patientAge">Patient Age:</label>
+      <input type="number" id="patientAge" name="patientAge" ><br><br>
+    
+      <label for="patientWeight">Patient Weight (lbs):</label>
+      <input type="number" id="patientWeight" name="patientWeight" required><br><br>
+    
+    </fieldset>
+    <br><br>
+
+
+
+    <fieldset>
+      <legend>Medical History</legend>
+
+      <label for="currentlyTestosterone">Currently on Testosterone?</label>
+      <input type="checkbox" id="currentlyTestosterone" name="currentlyTestosterone">
+      <br><br>
+
+      <label for="currentlyADD">Currently taking ADD meds (Adderall, Concerta, Vyvanse etc.)?</label>
+      <input type="checkbox" id="currentlyADD" name="currentlyADD">
+      <br><br>
+
+      
+      <label for="chronicPain">Chronic Pain Patient</label>
+      <input type="checkbox" id="chronicPain" name="chronicPain">
+      <br><br>
+
+      <label for="prostateCancer">Prostate Cancer</label>
+      <input type="checkbox" id="prostateCancer" name="prostateCancer">
+      <br><br>
+
+      <label for="yearsCancerFree">Years Cancer Free:</label>
+      <select id="yearsCancerFree">
+        <option value="">Select</option>
+        <option value="Average">Average</option>
+        <option value="Under">Under 2 Years</option>
+        <option value="Over">Over 2 Years</option>
+      </select>
+      <br><br>
+
+      <label for="activityLevel">Activity Level:</label>
+      <select id="activityLevel" required>
+        <option value="">Select</option>
+        <option value="Average">Average</option>
+        <option value="High">High</option>
+        <option value="Low">Low</option>
+      </select>
+
+    </fieldset>
+    <br><br>
+
+
+
+
+
+    <fieldset>
+      <legend>Laboratory Data</legend>
+      <label for="psa">PSA:</label>
+      <input type="number" id="psa" name="psa" step="0.01"><br><br>
+    
+      <label for="totalTestosterone">Total Testosterone:</label>
+      <input type="number" id="totalTestosterone" name="totalTestosterone" step="0.01" required><br><br>
+
+      <label for="freeT3">Free T3:</label>
+      <input type="number" id="freeT3" name="freeT3" step="0.01"><br><br>
+    </fieldset>
+
+    <input type="submit" value="Calculate">
+  </form>
+</body>
+</html>
