@@ -14,6 +14,13 @@ window.addEventListener("DOMContentLoaded", function () {
     function calculateDoses()
     {
 
+        //clearing calculated value and warning for every new calculation
+        document.getElementById("testosteroneDose").innerHTML = "";
+        document.getElementById("desiccatedThyroidDose").innerHTML = "";
+        var appendcontent = document.getElementById("appendWarning");
+        appendcontent.innerHTML = "";
+
+
         //calculate Dessicated Thyroide Dose
         var freeT3 = document.getElementById("freeT3").value;
 
@@ -43,7 +50,7 @@ window.addEventListener("DOMContentLoaded", function () {
             para.style.color = "white";
             para.style.fontStyle = "bold";
             para.innerHTML = msg;
-            document.getElementById("testosteroneDoseBlock").appendChild(para);
+            document.getElementById("appendWarning").appendChild(para);
 
         }
 
@@ -59,7 +66,7 @@ window.addEventListener("DOMContentLoaded", function () {
             para.style.color = "white";
             para.style.fontStyle = "bold";
             para.innerHTML = msg;
-            document.getElementById("testosteroneDoseBlock").appendChild(para);
+            document.getElementById("appendWarning").appendChild(para);
         }
 
         //calculate testosterone dose if its not zero;
@@ -81,7 +88,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 para.style.color = "white";
                 para.style.fontStyle = "bold";
                 para.innerHTML = msg;
-                document.getElementById("testosteroneDoseBlock").appendChild(para);
+                document.getElementById("appendWarning").appendChild(para);
             }
 
             if(testosteroneDoseFlag === 2 && testosteroneDose!=0 && testosteroneDose!=2600)
@@ -93,7 +100,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 para.style.color = "white";
                 para.style.fontStyle = "bold";
                 para.innerHTML = msg;
-                document.getElementById("testosteroneDoseBlock").appendChild(para);
+                document.getElementById("appendWarning").appendChild(para);
             }
 
             if(testosteroneDoseFlag === 3 && testosteroneDose!=0 && testosteroneDose!=2600)
@@ -105,7 +112,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 para.style.color = "white";
                 para.style.fontStyle = "bold";
                 para.innerHTML = msg;
-                document.getElementById("testosteroneDoseBlock").appendChild(para);
+                document.getElementById("appendWarning").appendChild(para);
             }
 
         }
