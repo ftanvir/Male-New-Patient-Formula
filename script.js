@@ -10,7 +10,11 @@ window.addEventListener("DOMContentLoaded", function () {
     calculateDoses();
   });
 
-  
+  //declare a global array to store messages
+    var messages = [];
+  //declare a global variable to store the result of calculation
+    var result = 0;
+
     function calculateDoses()
     {
 
@@ -70,53 +74,25 @@ window.addEventListener("DOMContentLoaded", function () {
         }
 
         //calculate testosterone dose if its not zero;
-        if(flag ===0 && document.getElementById("currentlyTestosterone").checked === true)
+        if(flag ===0)
         {
-            var result = calculateTestosteroneDose();
-            let testosteroneDose = result[0];
-            let testosteroneDoseFlag = result[1];
+            calculateTestosteroneDose();
 
-            document.getElementById("testosteroneDose").innerHTML = testosteroneDose + " mg pellets";
-            // console.log(testoreneDose);
+            document.getElementById("testosteroneDose").innerHTML = result + " mg pellets";
 
-            if(testosteroneDoseFlag === 1 && testosteroneDose!=0 && testosteroneDose!=2600)
+            if(messages.length>0)
             {
-                let msg = "Testosterone dose increased due to: higher Activity Level";
-                // document.getElementById("testosteroneDose").innerHTML = val;
-
-                var para = document.createElement("p");
-                para.style.color = "white";
-                para.style.fontStyle = "bold";
-                para.innerHTML = msg;
-                document.getElementById("appendWarning").appendChild(para);
-            }
-
-            if(testosteroneDoseFlag === 2 && testosteroneDose!=0 && testosteroneDose!=2600)
-            {
-                let msg = "Testosterone dose increased due to: currently taking ADD meds (Adderall, Concerta, Vyvanse, etc";
-                // document.getElementById("testosteroneDose").innerHTML = val;
-
-                var para = document.createElement("p");
-                para.style.color = "white";
-                para.style.fontStyle = "bold";
-                para.innerHTML = msg;
-                document.getElementById("appendWarning").appendChild(para);
-            }
-
-            if(testosteroneDoseFlag === 3 && testosteroneDose!=0 && testosteroneDose!=2600)
-            {
-                let msg = "Testosterone dose increased due to: chronic pain";
-                // document.getElementById("testosteroneDose").innerHTML = val;
-
-                var para = document.createElement("p");
-                para.style.color = "white";
-                para.style.fontStyle = "bold";
-                para.innerHTML = msg;
-                document.getElementById("appendWarning").appendChild(para);
+                for(let i=0; i<messages.length; i++)
+                {
+                    var para = document.createElement("p");
+                    para.style.color = "white";
+                    para.style.fontStyle = "bold";
+                    para.innerHTML = messages[i];
+                    document.getElementById("appendWarning").appendChild(para);
+                }
             }
 
         }
-        // calulateDesiccatedThyroidDose();
     }
 
     //calculate testosterone dose if its zero case1;
@@ -148,6 +124,9 @@ window.addEventListener("DOMContentLoaded", function () {
     //calculate testosterone dose if its not zero;
     function calculateTestosteroneDose()
     {
+        
+        result = 0;
+        messages = [];
         let weight = document.getElementById("patientWeight").value;
         let ActivityLevel = document.getElementById("activityLevel").value;
         let ActivityHigh = 0;
@@ -157,138 +136,143 @@ window.addEventListener("DOMContentLoaded", function () {
         let currentlyAdd = document.getElementById("currentlyADD").checked;
         let chronicPain = document.getElementById("chronicPain").checked;
 
-        // console.log(weight);
-
         if(currentlyAdd === false && chronicPain === false && ActivityHigh === 0) {
             
 
             if(weight>=0 && weight<=100)
             {
-                return [0,0];
+                result = Math.max(result, 0);
             }
             if(weight>100 && weight<=140)
             {
-                return [1400, 0];
+                result = Math.max(result, 1400);
             }
             if(weight>140 && weight<=160)
             {
-                return [1800, 0];
+                result = Math.max(result, 1800);
             }
             if(weight>160 && weight<=190)
             {
-                return [2000, 0];
+                result = Math.max(result, 2000);
             }
             if(weight>190 && weight<=200)
             {
-                return [2200, 0];
+                result = Math.max(result, 2200);
             }
             if(weight>200 && weight<=225) 
             {
-                return [2400, 0];
+                result = Math.max(result, 2400);
             }
             if(weight>225) 
             {
-                return [2600, 0];
+                result = Math.max(result, 2600);
             }
 
         }
 
+
+
         //if activity level is high
         if(ActivityHigh===1) 
         {
+            messages.push("Testosterone dose increased due to: higher Activity Level");
+
             if(weight>=0 && weight<=100)
             {
-                return [0,0];
+                result = Math.max(result , 0);
             }
             if(weight>100 && weight<=140)
             {
-                return [1800, 1];
+                result = Math.max(result , 1800);
             }
             if(weight>140 && weight<=160)
             {
-                return [2000, 1];
+                result = Math.max(result , 2000);
             }
             if(weight>160 && weight<=190)
             {
-                return [2200, 1];
+                result = Math.max(result , 2200);
+
             }
             if(weight>190 && weight<=200)
             {
-                return [2400, 1];
+                result = Math.max(result , 2400);
             }
             if(weight>200 && weight<=225) 
             {
-                return [2600, 1];
+                result = Math.max(result , 2600);
             }
             if(weight>225) 
             {
-                return [2600, 0];
+                result = Math.max(result , 2600);
             }
         }
 
         //if taking ADD meds
         if(currentlyAdd === true)
         {
+            messages.push("Testosterone dose increased due to: currently taking ADD meds (Adderall, Concerta, Vyvanse, etc)");
             if(weight>=0 && weight<=100)
             {
-                return [0,0];
+                result = Math.max(result , 0);
             }
             if(weight>100 && weight<=140)
             {
-                return [1600, 2];
+                result = Math.max(result , 1600);
             }
             if(weight>140 && weight<=160)
             {
-                return [2000, 2];
+                result = Math.max(result , 2000);
             }
             if(weight>160 && weight<=190)
             {
-                return [2200, 2];
+                result = Math.max(result , 2200);
             }
             if(weight>190 && weight<=200)
             {
-                return [2400, 2];
+                result = Math.max(result , 2400);
             }
             if(weight>200 && weight<=225) 
             {
-                return [2600, 2];
+                result = Math.max(result , 2600);
             }
             if(weight>225) 
             {
-                return [2600, 2];
+                result = Math.max(result , 2600);
             }
         }
 
         //if chronic pain patient
         if(chronicPain === true)
         {
+            messages.push("Testosterone dose increased due to: chronic pain patient.");
             if(weight>=0 && weight<=100)
             {
-                return [0,0];
+                result = Math.max(result , 0);
             }
             if(weight>100 && weight<=140)
             {
-                return [1600, 3];
+                result = Math.max(result , 1600);
             }
             if(weight>140 && weight<=160)
             {
-                return [2000, 3];
+                result = Math.max(result , 2000);
             }
             if(weight>160 && weight<=190)
             {
-                return [2200, 3];
+                result = Math.max(result , 2200);
             }
             if(weight>190 && weight<=200)
             {
-                return [2400, 3];
+                result = Math.max(result , 2400);
             }
             if(weight>200 && weight<=225) 
             {
-                return [2600, 3];
+                result = Math.max(result , 2600);
             }
             if(weight>225) 
             {
-                return [2600, 0];
+                result = Math.max(result , 2600);
             }
         }
 
